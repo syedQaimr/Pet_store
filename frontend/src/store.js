@@ -62,7 +62,7 @@ let initialState = {
 };
 
 const middleware = [thunk];
-
+// Store
 const store = createStore(
   reducer,
   initialState,
