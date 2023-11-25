@@ -13,7 +13,7 @@ const options = {
   position: positions.BOTTOM_CENTER,
   transition: transitions.SCALE,
 };
-
+// Root of Application
 const root = createRoot(document.getElementById('root'));
 root.render(
   <Provider store={store}>
