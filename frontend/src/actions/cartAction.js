@@ -34,7 +34,7 @@ import {
     localStorage.setItem("cartItems", JSON.stringify(getState().cart.cartItems));
   };
   
-  // SAVE SHIPPING INFO
+  // SAVE SHIPPING INFOMATIOM
   export const saveShippingInfo = (data) => async (dispatch) => {
     dispatch({
       type: SAVE_SHIPPING_INFO,
