@@ -76,7 +76,7 @@ export const getAdminProduct = () => async (dispatch) => {
   }
 };
 
-// Create Product
+// Create Product ADmin
 export const createProduct = (productData) => async (dispatch) => {
   try {
     dispatch({ type: NEW_PRODUCT_REQUEST });
