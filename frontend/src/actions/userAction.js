@@ -88,7 +88,7 @@ import {
     }
   };
   
-  // Logout User
+  // Logout Users
   export const logout = () => async (dispatch) => {
     try {
       await axios.get(`/api/v1/logout`);
