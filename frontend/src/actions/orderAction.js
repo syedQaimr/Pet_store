@@ -43,7 +43,7 @@ import {
     }
   };
   
-  // My Orders
+  // My Orders (USers)
   export const myOrders = () => async (dispatch) => {
     try {
       dispatch({ type: MY_ORDERS_REQUEST });
