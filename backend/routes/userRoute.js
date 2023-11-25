@@ -1,4 +1,6 @@
 const express = require("express");
+
+// Routes 
 const {
   registerUser,
   loginUser,
