@@ -19,12 +19,12 @@ import {
   DialogTitle,
   Button,
 } from "@material-ui/core";
-// import { Rating } from "@material-ui/lab";
+import { Rating } from "@material-ui/lab";
 import ReactStars from "react-rating-stars-component";
 import { NEW_REVIEW_RESET } from "../../constants/productConstants";
 import { useParams } from "react-router-dom";
 
-const ProductDetails = ({ match }) => {
+const ProductDetails = () => {
   const dispatch = useDispatch();
   const alert = useAlert();
   const { id } = useParams();
@@ -38,18 +38,22 @@ const ProductDetails = ({ match }) => {
 
   const options = {
     size: "large",
-    value: product.ratings,
+    value: product?.ratings,
     readOnly: true,
     precision: 0.5,
   };
 
   const [quantity, setQuantity] = useState(1);
   const [open, setOpen] = useState(false);
-  // const [rating, setRating] = useState(0);
+  const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
 
   const increaseQuantity = () => {
+    
     if (product.Stock <= quantity) return;
+    console.log(product.Stock);
+    console.log(quantity);
+    
     const qty = quantity + 1;
     setQuantity(qty);
   };
@@ -104,36 +108,34 @@ const ProductDetails = ({ match }) => {
         <Loader />
       ) : (
         <Fragment>
-          <MetaData title={`${product.name} -- ECOMMERCE`} />
+          <MetaData title={`${product?.name} -- ECOMMERCE`} />
+
           <div className="ProductDetails">
+            <Carousel>
+              {product?.images &&
+                product?.images.map((item, i) => (
+                  <img
+                    className="CarouselImage"
+                    key={i}
+                    src={item?.url}
+                    alt={`${i} Slide`}
+                  />
+                ))}
+            </Carousel>
             <div>
-              <Carousel>
-                {product.images &&
-                  product.images.map((item, i) => (
-                    <img
-                      className="CarouselImage"
-                      key={item.url}
-                      src={item.url}
-                      alt={`${i} Slide`}
-                    />
-                  ))}
-              </Carousel>
-            </div>
-        
-          <div>
               <div className="detailsBlock-1">
-                <h2>{product.name}</h2>
-                <p>Product # {product._id}</p>
+                <h2>{product?.name}</h2>
+                <p>Product # {product?._id}</p>
               </div>
               <div className="detailsBlock-2">
-                <ReactStars {...options} />
+                <Rating {...options} />
                 <span className="detailsBlock-2-span">
                   {" "}
-                  ({product.numOfReviews} Reviews)
+                  ({product?.numOfReviews} Reviews)
                 </span>
               </div>
               <div className="detailsBlock-3">
-                <h1>{`$${product.price}`}</h1>
+                <h1>{`$${product?.price}`}</h1>
                 <div className="detailsBlock-3-1">
                   <div className="detailsBlock-3-1-1">
                     <button onClick={decreaseQuantity}>-</button>
@@ -141,7 +143,7 @@ const ProductDetails = ({ match }) => {
                     <button onClick={increaseQuantity}>+</button>
                   </div>
                   <button
-                    disabled={product.Stock < 1 ? true : false}
+                    disabled={product?.Stock < 1 ? true : false}
                     onClick={addToCartHandler}
                   >
                     Add to Cart
@@ -150,14 +152,14 @@ const ProductDetails = ({ match }) => {
 
                 <p>
                   Status:
-                  <b className={product.Stock < 1 ? "redColor" : "greenColor"}>
-                    {product.Stock < 1 ? "OutOfStock" : "InStock"}
+                  <b className={product?.Stock < 1 ? "redColor" : "greenColor"}>
+                    {product?.Stock < 1 ? "OutOfStock" : "InStock"}
                   </b>
                 </p>
               </div>
 
               <div className="detailsBlock-4">
-                Description : <p>{product.description}</p>
+                Description : <p>{product?.description}</p>
               </div>
 
               <button onClick={submitReviewToggle} className="submitReview">
@@ -175,21 +177,23 @@ const ProductDetails = ({ match }) => {
           >
             <DialogTitle>Submit Review</DialogTitle>
             <DialogContent className="submitDialog">
-              <ReactStars
-                onChange={(e) => setRating(e.target.value)}
-                // value={rating}
+              <Rating    
+                onChange={(e) => setRating(e.target?.value)}
+                value={rating}
+                
                 size="large"
               />
+              console.log(rating)
 
               <textarea
                 className="submitDialogTextArea"
                 cols="30"
                 rows="5"
                 value={comment}
-                onChange={(e) => setComment(e.target.value)}
+                onChange={(e) => setComment(e.target?.value)}
               ></textarea>
             </DialogContent>
-          <DialogActions>
+            <DialogActions>
               <Button onClick={submitReviewToggle} color="secondary">
                 Cancel
               </Button>
@@ -199,11 +203,11 @@ const ProductDetails = ({ match }) => {
             </DialogActions>
           </Dialog>
 
-          {product.reviews && product.reviews[0] ? (
+          {product?.reviews && product?.reviews[0] ? (
             <div className="reviews">
-              {product.reviews &&
-                product.reviews.map((review) => (
-                  <ReviewCard key={review._id} review={review} />
+              {product?.reviews &&
+                product?.reviews.map((review) => (
+                  <ReviewCard key={review?._id} review={review} />
                 ))}
             </div>
           ) : (
@@ -217,43 +221,3 @@ const ProductDetails = ({ match }) => {
 
 export default ProductDetails;
 
-// import React, { Fragment, useEffect } from "react";
-// import Carousel from "react-material-ui-carousel";
-// import "./ProductDetails.css";
-// import { useDispatch, useSelector } from "react-redux";
-// import { getProductDetails } from "../../actions/productAction";
-// import { useParams } from "react-router-dom";
-
-// const ProductDetails = ({ match }) => {
-//   const dispatch = useDispatch();
-//   const {id} = useParams();
-//   const { product, loading, error } = useSelector(
-//     (state) => state.productDetails
-//   );
-//   useEffect(() => {
-//     dispatch(getProductDetails(id));
-//   }, [dispatch, id]);
-
-//   // Render the product details
-//   return (
-//     <Fragment>
-//       <div className="ProductDetails">
-//         <div>
-//           <Carousel>
-//             {product.images &&
-//               product.images.map((item, i) => (
-//                 <img
-//                   className="CarouselImage"
-//                   key={i}
-//                   src={item.url}
-//                   alt={`${i} Slide`}
-//                 />
-//               ))}
-//           </Carousel>
-//         </div>
-//       </div>
-//     </Fragment>
-//   );
-// };
-
-// export default ProductDetails;
