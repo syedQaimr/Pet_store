@@ -105,6 +105,7 @@ const Products = () => {
               <Typography component="legend">Ratings Above</Typography>
               <Slider
                 value={ratings}
+  
                 onChange={(e, newRating) => {
                   setRatings(newRating);
                 }}
