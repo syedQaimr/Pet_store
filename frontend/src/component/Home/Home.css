@@ -10,17 +10,17 @@
     text-align: center;
     align-items: center;
     justify-content: center;
-    color: rgb(78, 72, 72);
+    color: rgb(88, 87, 85)
   }
   
   .banner > h1 {
-    margin: 5vmax;
+    margin: 3vmax;
   
-    font: 600 2.5vmax "Roboto";
+    font: 600 2.5vmax "Chilanka";
   }
   
   .banner > p {
-    font: 600 2vmax "Roboto";
+    font: 600 2.5vmax "Chilanka";
   }
   
   .banner > a > button {
