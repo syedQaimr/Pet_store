@@ -42,8 +42,10 @@ import UsersList from "./component/Admin/UserList";
 import UpdateProduct from "./component/Admin/UpdateProduct";
 import ProcessOrder from "./component/Admin/ProcessOrder";
 import UpdateUser from "./component/Admin/UpdateUser";
+import ProductReviews from "./component/Admin/ProductReviews";
 
 function App() {
+
   const { isAuthenticated, user } = useSelector((state) => state.user);
 
   const [stripeApiKey, setStripeApiKey] = useState("");
@@ -53,6 +55,8 @@ function App() {
 
     setStripeApiKey(data?.stripeApiKey);
   }
+
+ 
 
   React.useEffect(() => {
     WebFont.load({
@@ -71,7 +75,6 @@ function App() {
       <Header />
       {isAuthenticated && <UserOptions user={user} />}
       <Routes>
-        <Route path="/account" element={<Profile />} isAuthenticated />
         <Route path="/" element={<Home />} />
         <Route path="/product/:id" element={<ProductDetails />} />
         <Route path="/products" element={<Products />} />
@@ -82,6 +85,9 @@ function App() {
         <Route path="/password/reset/:token" element={<ResetPassword />} />
         <Route path="/me/update" element={<UpdateProfile />} />
         <Route path="/password/update" element={<UpdatePassword />} />
+
+        <Route path="/account" element={<Profile/>} />
+
         <Route path="/cart" element={<Cart />} />
         <Route path="/shipping" element={<Shipping />} />
         <Route path="/order/confirm" element={<ConfirmOrder />} />
@@ -107,10 +113,16 @@ function App() {
         }
         /> */}
 
-        <Route isAdmin={true} path="/admin/dashboard" element={<Dashboard />} />
+        <Route
+          isAdmin={true}
+          isAuthenticated
+          path="/admin/dashboard"
+          element={<Dashboard />}
+        />
         <Route
           path="/admin/products"
           isAdmin={true}
+          isAuthenticated
           element={<ProductList />}
         />
         <Route path="/admin/product" isAdmin={true} element={<NewProduct />} />
@@ -132,16 +144,11 @@ function App() {
 
         <Route path="/admin/user/:id" isAdmin={true} element={<UpdateUser />} />
 
-        {/*
-
-        
-
-        <ProtectedRoute
-          exact
+        <Route
           path="/admin/reviews"
           isAdmin={true}
-          component={ProductReviews}
-        /> */}
+          element={<ProductReviews />}
+        />
       </Routes>
 
       {/* <Route exact path="/about" component={About} /> */}

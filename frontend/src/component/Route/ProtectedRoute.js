@@ -1,30 +1,25 @@
-import React, { Fragment } from "react";
-import { useSelector } from "react-redux";
-import { Route,Navigate } from "react-router-dom";
+import { Navigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
-const ProtectedRoute = ({ isAdmin, element: Element, ...rest }) => {
-  const { loading, isAuthenticated, user } = useSelector((state) => state.user);
+const WithAuth = (Component, isAdmin) => {
+  const ProtectedComponent = (props) => {
+    const { loading, isAuthenticated, user } = useSelector((state) => state.user);
+    
+    // Your authentication and authorization logic
+    const isUserAdmin = user?.role === 'admin';
 
-  return (
-    <Fragment>
-      {/* {loading === false && (
-        <Route
-          {...rest}
-          element={(props) => {
-            if (isAuthenticated === false) {
-              return <Navigate to="/login" />;
-            }
+    if (loading) {
+      return null; // Handle loading state if needed
+    }
 
-            if (isAdmin === true && user.role !== "admin") {
-              return <Navigate to="/login" />;
-            }
+    if (!isAuthenticated || (isAdmin && !isUserAdmin)) {
+      return <Navigate to="/login" />;
+    }
 
-            return <Element {...props} />;
-          }}
-        />
-      )} */}
-    </Fragment>
-  );
+    return <Component {...props} />;
+  };
+
+  return ProtectedComponent;
 };
 
-export default ProtectedRoute;
+export default WithAuth;

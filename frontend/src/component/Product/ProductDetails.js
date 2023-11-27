@@ -183,8 +183,6 @@ const ProductDetails = () => {
                 
                 size="large"
               />
-              console.log(rating)
-
               <textarea
                 className="submitDialogTextArea"
                 cols="30"
@@ -193,6 +191,7 @@ const ProductDetails = () => {
                 onChange={(e) => setComment(e.target?.value)}
               ></textarea>
             </DialogContent>
+            
             <DialogActions>
               <Button onClick={submitReviewToggle} color="secondary">
                 Cancel
