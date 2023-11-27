@@ -85,15 +85,15 @@ const ProductList = () => {
       minWidth: 150,
       type: "number",
       sortable: false,
-      renderCell: (id) => {
+      renderCell: (params) => {
         return (
           <Fragment>
-            <Link to={`/admin/product/${id?.getValue(id?.id, "id")}`}>
+            <Link to={`/admin/product/${params?.getValue(params.id, "id")}`}>
               <EditIcon />
             </Link>
 
             <Button
-              onClick={() => deleteProductHandler(id?.getValue(id?.id, "id"))}
+              onClick={() => deleteProductHandler(params.getValue(params.id, "id"))}
             >
               <DeleteIcon />
             </Button>
