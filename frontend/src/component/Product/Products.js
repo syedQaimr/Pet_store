@@ -12,18 +12,19 @@ import MetaData from "../layout/MetaData";
 import { useParams } from "react-router-dom";
 
 const categories = [
-  "Laptop",
-  "Footwear",
-  "Bottom",
-  "Tops",
-  "Attire",
-  "Camera",
-  "SmartPhones",
+  "Pet Food",
+  "Dog Food",
+  "Cat Food",
+  "Pet Toy",
+  "Cloth",
+  "Tick & Flea",
+  "Medicine",
+  "Fish",
 ];
 
 const Products = () => {
   const dispatch = useDispatch();
-  const {keyword}=useParams();
+  const { keyword } = useParams();
 
   const alert = useAlert();
 
@@ -41,7 +42,7 @@ const Products = () => {
     filteredProductsCount,
   } = useSelector((state) => state.products);
 
-//   const keyword = keywords;
+  //   const keyword = keywords;
 
   const setCurrentPageNo = (e) => {
     setCurrentPage(e);
@@ -105,7 +106,6 @@ const Products = () => {
               <Typography component="legend">Ratings Above</Typography>
               <Slider
                 value={ratings}
-  
                 onChange={(e, newRating) => {
                   setRatings(newRating);
                 }}
