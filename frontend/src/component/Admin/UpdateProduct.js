@@ -41,13 +41,14 @@ const UpdateProduct = () => {
   const [imagesPreview, setImagesPreview] = useState([]);
 
   const categories = [
-    "Laptop",
-    "Footwear",
-    "Bottom",
-    "Tops",
-    "Attire",
-    "Camera",
-    "SmartPhones",
+    "Pet Food",
+    "Dog Food",
+    "Cat Food",
+    "Pet Toy",
+    "Cloth",
+    "Tick & Flea",
+    "Medicine",
+    "Fish",
   ];
 
   const productId = id;
