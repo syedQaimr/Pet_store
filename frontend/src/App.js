@@ -43,9 +43,10 @@ import UpdateProduct from "./component/Admin/UpdateProduct";
 import ProcessOrder from "./component/Admin/ProcessOrder";
 import UpdateUser from "./component/Admin/UpdateUser";
 import ProductReviews from "./component/Admin/ProductReviews";
+import Contact from "./component/layout/Contact/Contact";
+import About from "./component/layout/About/About";
 
 function App() {
-
   const { isAuthenticated, user } = useSelector((state) => state.user);
 
   const [stripeApiKey, setStripeApiKey] = useState("");
@@ -55,8 +56,6 @@ function App() {
 
     setStripeApiKey(data?.stripeApiKey);
   }
-
- 
 
   React.useEffect(() => {
     WebFont.load({
@@ -85,9 +84,9 @@ function App() {
         <Route path="/password/reset/:token" element={<ResetPassword />} />
         <Route path="/me/update" element={<UpdateProfile />} />
         <Route path="/password/update" element={<UpdatePassword />} />
-
-        <Route path="/account" element={<Profile/>} />
-
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/account" element={<Profile />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/shipping" element={<Shipping />} />
         <Route path="/order/confirm" element={<ConfirmOrder />} />
