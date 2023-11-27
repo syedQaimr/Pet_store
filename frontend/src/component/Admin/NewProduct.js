@@ -17,7 +17,7 @@ import { useNavigate } from "react-router-dom";
 const NewProduct = () => {
   const dispatch = useDispatch();
   const alert = useAlert();
-  const navigate=useNavigate()
+  const navigate = useNavigate();
 
   const { loading, error, success } = useSelector((state) => state.newProduct);
 
@@ -30,13 +30,14 @@ const NewProduct = () => {
   const [imagesPreview, setImagesPreview] = useState([]);
 
   const categories = [
-    "Laptop",
-    "Footwear",
-    "Bottom",
-    "Tops",
-    "Attire",
-    "Camera",
-    "SmartPhones",
+    "Pet Food",
+    "Dog Food",
+    "Cat Food",
+    "Pet Toy",
+    "Cloth",
+    "Tick & Flea",
+    "Medicine",
+    "Fish",
   ];
 
   useEffect(() => {
